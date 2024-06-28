@@ -1,4 +1,4 @@
-package com.in28minutes.jpa.hibernate.section05;
+ package com.in28minutes.jpa.hibernate.section05;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.in28minutes.jpa.hibernate.section05.entity.Course;
 import com.in28minutes.jpa.hibernate.section05.repository.CourseRepository;
+
+import jakarta.persistence.EntityManager;
 
 //CommandLineRunner: 스프링 애플리케이션 가독 직후 실행되는 코드를 run method에 정의함
 @SpringBootApplication
@@ -27,8 +29,9 @@ public class Section05Application implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Course course = repository.findById(10001L);
 		logger.info("Course 10001 -> {}", course);
-		
 		repository.save(new Course("Microservices in 100 steps"));
-	}
 
+		repository.playWithEntityManager2();
+	}
+	
 }
