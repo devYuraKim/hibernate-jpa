@@ -71,5 +71,14 @@ public class CourseRepository {
 		em.refresh(course1);
 		em.flush();
 	}
+
+	public void playWithEntityManager3() {
+		Course course1 = new Course("Web Services in 100 steps");
+		em.persist(course1);
+		
+		Course course2 = findById(10001L);
+		course2.setName("JPA in 50 steps - updated");
+		
+	}
 	
 }

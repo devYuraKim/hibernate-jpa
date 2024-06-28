@@ -31,7 +31,7 @@ public class Section05Application implements CommandLineRunner {
 		logger.info("Course 10001 -> {}", course);
 		repository.save(new Course("Microservices in 100 steps"));
 
-		repository.playWithEntityManager2();
+		repository.playWithEntityManager3();
 	}
 	
 }
