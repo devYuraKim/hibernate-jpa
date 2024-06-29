@@ -17,6 +17,7 @@ import com.in28minutes.jpa.hibernate.section05.entity.Passport;
 import com.in28minutes.jpa.hibernate.section05.entity.Student;
 
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 @SpringBootTest(classes=Section05Application.class)
 class StudentRepositoryTest {
@@ -30,6 +31,8 @@ class StudentRepositoryTest {
 	EntityManager em;
 	
 	@Test
+	@Transactional
+	//Transactional: wraps the method within a single transaction context
 	public void retrieveStudentAndPassport() {
 		Student student = em.find(Student.class, 20001l);
 		logger.info("student -> {}", student);
