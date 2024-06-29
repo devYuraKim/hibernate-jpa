@@ -52,4 +52,12 @@ public class Student {
 		return String.format("Student[%s]", name);
 	}
 	
+	//Passport 정보
+	public Passport getPassport() {
+		return passport;
+	}
+
+	public void setPassport(Passport passport) {
+		this.passport = passport;
+	}
 }

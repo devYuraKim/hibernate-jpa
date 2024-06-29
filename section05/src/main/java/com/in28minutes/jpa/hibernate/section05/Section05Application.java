@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.in28minutes.jpa.hibernate.section05.entity.Course;
 import com.in28minutes.jpa.hibernate.section05.repository.CourseRepository;
+import com.in28minutes.jpa.hibernate.section05.repository.StudentRepository;
 
 import jakarta.persistence.EntityManager;
 
@@ -19,7 +20,9 @@ public class Section05Application implements CommandLineRunner {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private CourseRepository repository;
+	private CourseRepository courseRepository;
+	@Autowired
+	private StudentRepository studentRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Section05Application.class, args);
@@ -33,6 +36,7 @@ public class Section05Application implements CommandLineRunner {
 		//repository.save(new Course("Microservices in 100 steps"));
 		//repository.playWithEntityManager3();
 		
+		studentRepository.saveStudentWithPassport();
 	}
 	
 }
