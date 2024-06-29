@@ -46,5 +46,23 @@ public class StudentRepository {
 		em.persist(student);		
 	}
 	
+	public void someOperationToUnderstandPersistenceContext() {
+		//Database Operation 1 - retrieve 
+		Student student = em.find(Student.class, 20001l); // EntityManager: persistence context {student}
+		
+		//Database Operation 2 - retrieve
+		Passport passport = student.getPassport(); 
+		// w/o @Transactional: no persistence context 왜냐면 Entity Manager가 없으니까!
+		// w/ @Transactional: persistence context {student, passport}
+		//아래 코드도 모두 마찬가지
+		//하지만 class에 @Transactional 적용되어 있어서 method에 @가 적용된 것과 동일한 효과
+		
+		//Database Operation 3 - update
+		passport.setNumber("updated"); //persistence context {student, passport'}
+		
+		//Database Operation 4 - update
+		student.setName("updated"); //persistence context {student', passport'}
+	}
+	
 	
 }

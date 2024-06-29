@@ -31,6 +31,12 @@ class StudentRepositoryTest {
 	EntityManager em;
 	
 	@Test
+//	@Transactional
+	public void someTest() {
+		repository.someOperationToUnderstandPersistenceContext();
+	}
+	
+	@Test
 	@Transactional
 	//Transactional: wraps the method within a single transaction context
 	public void retrieveStudentAndPassport() {
