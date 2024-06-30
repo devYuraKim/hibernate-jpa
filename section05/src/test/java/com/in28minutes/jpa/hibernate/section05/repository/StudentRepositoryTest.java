@@ -37,14 +37,21 @@ class StudentRepositoryTest {
 	}
 	
 	@Test
-	@Transactional
-	//Transactional: wraps the method within a single transaction context
+	@Transactional //wraps the method within a single transaction context
+	//Student 정보로 Passport 정보 조회
 	public void retrieveStudentAndPassport() {
 		Student student = em.find(Student.class, 20001l);
 		logger.info("student -> {}", student);
 		logger.info("passport -> {}", student.getPassport());
 	}
 	
-	
+	@Test
+	@Transactional
+	//Passport 정보로 Student 정보 조회
+	public void retrievePassportAndAssociatedStudent() {
+		Passport passport = em.find(Passport.class, 40001l);
+		logger.info("passport -> {}", passport);
+		logger.info("student -> {}", passport.getStudent());
+	}
 	
 }
