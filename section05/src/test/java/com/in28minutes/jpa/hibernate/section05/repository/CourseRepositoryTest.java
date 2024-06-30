@@ -13,12 +13,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.in28minutes.jpa.hibernate.section05.Section05Application;
 import com.in28minutes.jpa.hibernate.section05.entity.Course;
+import com.in28minutes.jpa.hibernate.section05.entity.Review;
+
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 @SpringBootTest(classes=Section05Application.class)
 class CourseRepositoryTest {
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	CourseRepository repository;
+	
+	@Autowired
+	EntityManager em;
 	
 	@Test
 	public void findById_basic() {
@@ -57,4 +66,17 @@ class CourseRepositoryTest {
 		repository.playWithEntityManager();
 	}
 	
+	@Test
+	@Transactional
+	public void retrieveReviewsForCourse() {
+		Course course = repository.findById(10001l);
+		logger.info("{}", course.getReviews());
+	}
+
+	@Test
+	@Transactional
+	public void retrieveCourseForReview() {
+		Review review = em.find(Review.class, 50001l);
+		logger.info("{}", review.getCourse());
+	}
 }
