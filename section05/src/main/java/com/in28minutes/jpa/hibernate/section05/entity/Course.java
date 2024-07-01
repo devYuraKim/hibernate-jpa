@@ -12,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -43,6 +44,9 @@ public class Course {
 	@OneToMany(mappedBy = "course")
 	private List<Review> reviews = new ArrayList<>();
 	
+	@ManyToMany
+	private List<Student> students = new ArrayList<>();
+	
 	//JPA 사용하려면 default constructor가 있어야 함
 	protected Course() {
 		
@@ -69,7 +73,7 @@ public class Course {
 		return "Course [id=" + id + ", name=" + name + "]";
 	}
 
-	//review 관련
+	//Review 관련
 	public List<Review> getReviews() {
 		return reviews;
 	}
@@ -81,4 +85,15 @@ public class Course {
 	public void removeReview(Review review) {
 		this.reviews.remove(review);
 	}
+
+	//Student 관련
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public void addStudent(Student student) {
+		this.students.add(student);
+	}
+	
+	
 }
