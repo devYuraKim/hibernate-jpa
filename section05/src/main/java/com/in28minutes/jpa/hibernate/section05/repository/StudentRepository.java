@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.in28minutes.jpa.hibernate.section05.entity.Course;
 import com.in28minutes.jpa.hibernate.section05.entity.Passport;
 import com.in28minutes.jpa.hibernate.section05.entity.Student;
 
@@ -64,5 +65,16 @@ public class StudentRepository {
 		student.setName("updated"); //persistence context {student', passport'}
 	}
 	
+	public void insertHardcodedStudentAndCourse() {
+		Student student = new Student("Jack");
+		Course course = new Course("Microservices in 100 steps");
+		em.persist(student);
+		em.persist(course);
+		//student와 course 연결 
+		student.addCourse(course);
+		course.addStudent(student);
+		//owning side를 DB에 저장
+		em.persist(student);
+	}
 	
 }

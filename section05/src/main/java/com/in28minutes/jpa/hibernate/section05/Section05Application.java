@@ -44,10 +44,12 @@ public class Section05Application implements CommandLineRunner {
 		
 		//courseRepository.addHardCodedReviewsForCourse();
 		
-		List<Review> reviews = new ArrayList<>();
-		reviews.add(new Review("5", "Great Hands-on stuff"));
-		reviews.add(new Review("5", "Hats-off"));
-		courseRepository.addReviewsForCourse(10003l, reviews);
+		//List<Review> reviews = new ArrayList<>();
+		//reviews.add(new Review("5", "Great Hands-on stuff"));
+		//reviews.add(new Review("5", "Hats-off"));
+		//courseRepository.addReviewsForCourse(10003l, reviews);
+		
+		studentRepository.insertHardcodedStudentAndCourse();
 	}
 	
 }
