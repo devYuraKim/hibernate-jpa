@@ -79,4 +79,18 @@ class CourseRepositoryTest {
 		Review review = em.find(Review.class, 50001l);
 		logger.info("{}", review.getCourse());
 	}
+	
+	
+	/**CACHING**/
+	@Test
+	@Transactional //이게 없으면 first query, second query 각각 실행
+	public void findById_firstLevelCache_demo() {
+		Course course1 = repository.findById(10001L);
+		logger.info("first query --- {}", course1);
+		Course course2 = repository.findById(10001L);
+		logger.info("second query --- {}", course2);
+		assertEquals("JPA in 50 steps", course1.getName());
+		assertEquals("JPA in 50 steps", course1.getName());
+	}
+	
 }
