@@ -67,14 +67,12 @@ public class StudentRepository {
 	
 	public void insertHardcodedStudentAndCourse() {
 		Student student = new Student("Jack");
-		Course course = new Course("Microservices in 100 steps");
+		Course course = new Course("Microservices in 100 steps - Updated");
 		em.persist(student);
 		em.persist(course);
 		//student와 course 연결 
 		student.addCourse(course);
 		course.addStudent(student);
-		//owning side를 DB에 저장
-		em.persist(student);
 	}
 	
 }
