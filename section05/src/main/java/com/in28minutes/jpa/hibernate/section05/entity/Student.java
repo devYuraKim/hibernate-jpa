@@ -12,6 +12,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
@@ -31,6 +33,12 @@ public class Student {
 	private Passport passport;
 	
 	@ManyToMany
+	@JoinTable(name="STUDENT_COURSE",
+		joinColumns = @JoinColumn(name="STUDENT_ID"),
+		inverseJoinColumns = @JoinColumn(name="COURSE_ID") 
+	)
+	//joinColumn(owning side) = STUDENT_ID
+	//inverseJoinColumn = COURSE_ID
 	private List<Course> courses = new ArrayList<>();
 	
 	//JPA 사용하려면 default constructor가 있어야 함
