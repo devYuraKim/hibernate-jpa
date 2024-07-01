@@ -1,5 +1,6 @@
  package com.in28minutes.jpa.hibernate.section05;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +11,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.in28minutes.jpa.hibernate.section05.entity.Course;
-import com.in28minutes.jpa.hibernate.section05.entity.Review;
+import com.in28minutes.jpa.hibernate.section05.entity.FullTimeEmployee;
+import com.in28minutes.jpa.hibernate.section05.entity.PartTimeEmployee;
 import com.in28minutes.jpa.hibernate.section05.repository.CourseRepository;
+import com.in28minutes.jpa.hibernate.section05.repository.EmployeeRepository;
 import com.in28minutes.jpa.hibernate.section05.repository.StudentRepository;
 
-import jakarta.persistence.EntityManager;
 
 //CommandLineRunner: 스프링 애플리케이션 가독 직후 실행되는 코드를 run method에 정의함
 @SpringBootApplication
@@ -27,6 +28,8 @@ public class Section05Application implements CommandLineRunner {
 	private CourseRepository courseRepository;
 	@Autowired
 	private StudentRepository studentRepository;
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Section05Application.class, args);
@@ -49,7 +52,11 @@ public class Section05Application implements CommandLineRunner {
 		//reviews.add(new Review("5", "Hats-off"));
 		//courseRepository.addReviewsForCourse(10003l, reviews);
 		
-		studentRepository.insertHardcodedStudentAndCourse();
+		//studentRepository.insertHardcodedStudentAndCourse();
+		
+		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
+		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
+		logger.info("AllEmployees -> {}", employeeRepository.retrieveallEmployees());
 	}
 	
 }
