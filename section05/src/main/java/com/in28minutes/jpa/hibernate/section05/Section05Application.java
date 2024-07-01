@@ -56,7 +56,9 @@ public class Section05Application implements CommandLineRunner {
 		
 		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
 		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
-		logger.info("AllEmployees -> {}", employeeRepository.retrieveallEmployees());
+		//logger.info("AllEmployees -> {}", employeeRepository.retrieveallEmployees());
+		logger.info("FullTimeEmployees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
+		logger.info("FullTimeEmployees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
 	}
 	
 }

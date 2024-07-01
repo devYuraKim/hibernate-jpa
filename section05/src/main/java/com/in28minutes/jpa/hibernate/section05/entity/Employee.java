@@ -7,9 +7,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.MappedSuperclass;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+
+@MappedSuperclass //MappedSuperclass cannot be an Entity
+//@Entity
+//@Inheritance(strategy = InheritanceType.JOINED)
 //@DiscriminatorColumn(name="EmployeeType") //SingleTable일 때 DTYPE 컬럼명을 재설정하는 annotation
 public abstract class Employee {
 	

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.in28minutes.jpa.hibernate.section05.entity.Employee;
 import com.in28minutes.jpa.hibernate.section05.entity.FullTimeEmployee;
+import com.in28minutes.jpa.hibernate.section05.entity.PartTimeEmployee;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -29,7 +30,16 @@ public class EmployeeRepository {
 	}
 	
 	//retrieve all employees
-	public List<Employee> retrieveallEmployees(){
-		return em.createQuery("select e from Employee e", Employee.class).getResultList();
+	//@MappedSuperclass를 사용하는 경우 Employee는 Entity가 아니게 되어 Employee table 조회 불가, 개별 table 조회 필요
+	//public List<Employee> retrieveallEmployees(){
+	//	return em.createQuery("select e from Employee e", Employee.class).getResultList();
+	//}
+	
+	public List<FullTimeEmployee> retrieveAllFullTimeEmployees(){
+		return em.createQuery("select e from FullTimeEmployee e", FullTimeEmployee.class).getResultList();
+	}
+	
+	public List<PartTimeEmployee> retrieveAllPartTimeEmployees(){
+		return em.createQuery("select e from PartTimeEmployee e", PartTimeEmployee.class).getResultList();
 	}
 }
