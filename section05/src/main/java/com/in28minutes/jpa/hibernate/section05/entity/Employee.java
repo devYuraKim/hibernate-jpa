@@ -9,8 +9,8 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="EmployeeType")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@DiscriminatorColumn(name="EmployeeType") //SingleTable일 때 DTYPE 컬럼명을 재설정하는 annotation
 public abstract class Employee {
 	
 	@Id
@@ -45,7 +45,5 @@ public abstract class Employee {
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + "]";
 	}
-
-	
 	
 }
