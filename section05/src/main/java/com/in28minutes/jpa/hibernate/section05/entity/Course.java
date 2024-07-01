@@ -44,7 +44,7 @@ public class Course {
 	@OneToMany(mappedBy = "course")
 	private List<Review> reviews = new ArrayList<>();
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "courses")
 	private List<Student> students = new ArrayList<>();
 	
 	//JPA 사용하려면 default constructor가 있어야 함
