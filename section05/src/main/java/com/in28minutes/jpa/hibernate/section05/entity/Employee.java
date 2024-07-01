@@ -9,7 +9,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 //@DiscriminatorColumn(name="EmployeeType") //SingleTable일 때 DTYPE 컬럼명을 재설정하는 annotation
 public abstract class Employee {
 	
