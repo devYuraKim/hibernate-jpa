@@ -19,7 +19,7 @@ public class StudentRepository {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	EntityManager em;
+	private EntityManager em;
 	
 	public Student findById(Long id) {
 		return em.find(Student.class, id);

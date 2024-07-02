@@ -22,7 +22,7 @@ public class EmployeeRepository {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	EntityManager em;
+	private EntityManager em;
 	
 	//insert an employee
 	public void insert(Employee employee) {
