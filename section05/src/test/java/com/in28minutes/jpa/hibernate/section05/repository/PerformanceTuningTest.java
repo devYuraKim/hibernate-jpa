@@ -24,16 +24,16 @@ class PerformanceTuningTest {
 	@Autowired
 	EntityManager em;
 	
-//	@Test
-//	@Transactional
-//	public void creatingNPlusOneProblem() {
-//		//여기에서 query 한 번 실행
-//		List<Course> courses = em.createNamedQuery("query_get_all_courses", Course.class).getResultList();
-//		//for loop 한 번마다 query 실행하면서 getStudents() 정보 확인
-//		for(Course course: courses) {
-//			logger.info("Course -> {}, Students -> {}", course, course.getStudents());
-//		}
-//	}
+	@Test
+	@Transactional
+	public void creatingNPlusOneProblem() {
+		//여기에서 query 한 번 실행
+		List<Course> courses = em.createNamedQuery("query_get_all_courses", Course.class).getResultList();
+		//for loop 한 번마다 query 실행하면서 getStudents() 정보 확인
+		for(Course course: courses) {
+			logger.info("Course -> {}, Students -> {}", course, course.getStudents());
+		}
+	}
 	
 	/** N+1 problem 해결하기 **/
 	//1.EntityGraph이용
@@ -56,13 +56,8 @@ class PerformanceTuningTest {
 	@Test
 	@Transactional
 	public void solvingNPlusOneProblem_JoinFetch() {
-
-		EntityGraph<Course> entityGraph = em.createEntityGraph(Course.class);
-		entityGraph.addSubgraph("students");
 		
-		List<Course> courses = em.createNamedQuery("query_get_all_courses", Course.class)
-				.setHint("jakarta.persistence.loadgraph", entityGraph)
-				.getResultList();
+		List<Course> courses = em.createNamedQuery("query_get_all_courses_join_fetch", Course.class).getResultList();
 		for(Course course: courses) {
 			logger.info("HEY Course -> {}, Students -> {}", course, course.getStudents());
 		}

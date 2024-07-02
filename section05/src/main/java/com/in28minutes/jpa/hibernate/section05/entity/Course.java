@@ -31,6 +31,7 @@ import jakarta.persistence.PreRemove;
 @NamedQueries(
 	value = {
 		@NamedQuery(name="query_get_all_courses", query="Select c From Course c"),
+		@NamedQuery(name="query_get_all_courses_join_fetch", query="Select c From Course c JOIN FETCH c.students s"),
 		@NamedQuery(name="query_get_100_step_courses", query="Select c From Course c where name like '%100 steps'")
 	}
 )
