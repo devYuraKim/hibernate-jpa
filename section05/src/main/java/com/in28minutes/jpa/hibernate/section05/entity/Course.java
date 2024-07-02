@@ -7,6 +7,9 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,6 +29,7 @@ import jakarta.persistence.OneToMany;
 		@NamedQuery(name="query_get_100_step_courses", query="Select c From Course c where name like '%100 steps'")
 	}
 )
+@Cacheable
 public class Course {
 	
 	@Id
@@ -45,6 +49,7 @@ public class Course {
 	private List<Review> reviews = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "courses")
+	@JsonIgnore
 	private List<Student> students = new ArrayList<>();
 	
 	//JPA 사용하려면 default constructor가 있어야 함
