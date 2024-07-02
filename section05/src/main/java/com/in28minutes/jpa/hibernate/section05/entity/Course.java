@@ -65,7 +65,7 @@ public class Course {
 	//soft delete
 	private boolean isDeleted;
 	
-	@PreRemove
+	@PreRemove //before removing
 	private void preRemove() {
 		logger.info("**********setting isDeleted to true");
 		this.isDeleted=true;

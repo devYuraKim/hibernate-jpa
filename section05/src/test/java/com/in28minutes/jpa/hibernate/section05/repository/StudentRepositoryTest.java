@@ -12,6 +12,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.in28minutes.jpa.hibernate.section05.Section05Application;
+import com.in28minutes.jpa.hibernate.section05.entity.Address;
 import com.in28minutes.jpa.hibernate.section05.entity.Course;
 import com.in28minutes.jpa.hibernate.section05.entity.Passport;
 import com.in28minutes.jpa.hibernate.section05.entity.Student;
@@ -68,5 +69,14 @@ class StudentRepositoryTest {
 		Course course = em.find(Course.class, 10001);
 		logger.info("course ===> {}", course.getName());
 		logger.info("students ===> {}", course.getStudents());
+	}
+	
+	@Test
+	@Transactional
+	public void setAddressDetails() {
+		Student student = em.find(Student.class, 20001l);
+		student.setAddress(new Address("No 101", "Some Street", "Hyderbad"));
+		em.flush();
+		logger.info("student address -> {}", student.getAddress());
 	}
 }

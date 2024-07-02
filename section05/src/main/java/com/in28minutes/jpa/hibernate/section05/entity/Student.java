@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +29,9 @@ public class Student {
 	
 	@Column(nullable=false)
 	private String name;
+	
+	@Embedded
+	private Address address;
 	
 	@OneToOne(fetch =FetchType.LAZY)
 	private Passport passport;
@@ -64,7 +68,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return String.format("Student[%s]", name);
+		return String.format("Student[%s, %s]", name, address);
 	}
 	
 	//Passport 정보
@@ -84,6 +88,14 @@ public class Student {
 	public void addCourse(Course courses) {
 		this.courses.add(courses);
 	}
-	
+
+	//Address 정보
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	
 }
