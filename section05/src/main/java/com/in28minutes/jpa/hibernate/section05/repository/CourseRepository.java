@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.in28minutes.jpa.hibernate.section05.entity.Course;
 import com.in28minutes.jpa.hibernate.section05.entity.Review;
+import com.in28minutes.jpa.hibernate.section05.entity.ReviewRating;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -25,6 +26,7 @@ public class CourseRepository {
 	
 	//findById(Long id)
 	public Course findById(Long id) {
+		
 		return em.find(Course.class, id);
 	}
 	
@@ -89,11 +91,11 @@ public class CourseRepository {
 		Course course = findById(10003l);
 		logger.info("course.getReviews -> {}", course.getReviews());
 		//2.add 2 reviews
-		Review review1 = new Review("5", "first review");
+		Review review1 = new Review(ReviewRating.FIVE, "first review");
 		course.addReview(review1);
 		review1.setCourse(course);
 		
-		Review review2 = new Review("5", "second review");
+		Review review2 = new Review(ReviewRating.FIVE, "second review");
 		course.addReview(review2);
 		review2.setCourse(course);
 		

@@ -8,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -22,7 +24,8 @@ public class Review {
 	@GeneratedValue
 	private Long id;
 	
-	private String rating;
+	@Enumerated(EnumType.STRING)
+	private ReviewRating rating;
 	
 	private String description;
 	
@@ -34,7 +37,7 @@ public class Review {
 		
 	}
 	
-	public Review(String rating, String description) {
+	public Review(ReviewRating rating, String description) {
 		this.rating = rating;
 		this.description = description;
 	}
@@ -47,11 +50,11 @@ public class Review {
 		this.description=description;
 	}
 	
-	public String getRating() {
+	public ReviewRating getRating() {
 		return rating;
 	}
 
-	public void setRating(String rating) {
+	public void setRating(ReviewRating rating) {
 		this.rating = rating;
 	}
 
@@ -61,7 +64,7 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return String.format("Review[%s %s]", rating, description);
+		return "Review [rating=" + rating + ", description=" + description + ", course=" + course + "]";
 	}
 
 	//Course 관련 정보

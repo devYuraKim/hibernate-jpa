@@ -94,7 +94,7 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", name=" + name + "]";
+		return String.format("Course[%s]", name);
 	}
 
 	//Review 관련
