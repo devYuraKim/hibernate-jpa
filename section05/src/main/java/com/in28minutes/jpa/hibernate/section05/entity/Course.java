@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,6 +23,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PreRemove;
 
 @Entity
 //@Table(name="CourseDetails")
@@ -30,8 +35,13 @@ import jakarta.persistence.OneToMany;
 	}
 )
 @Cacheable
+@SQLDelete(sql="update course set is_deleted=true where id=?") //SQL delete가 가동될 때 해당 query를 실행하라
+@SQLRestriction("is_deleted = false")
 public class Course {
 	
+	//non-static으로 logger field를 설정하면 column을 생성하려고 할 것이기 때문에 static으로 전환
+	private static Logger logger = LoggerFactory.getLogger(Course.class);
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -51,6 +61,15 @@ public class Course {
 	@ManyToMany(mappedBy = "courses")
 	@JsonIgnore
 	private List<Student> students = new ArrayList<>();
+	
+	//soft delete
+	private boolean isDeleted;
+	
+	@PreRemove
+	private void preRemove() {
+		logger.info("**********setting isDeleted to true");
+		this.isDeleted=true;
+	}
 	
 	//JPA 사용하려면 default constructor가 있어야 함
 	protected Course() {

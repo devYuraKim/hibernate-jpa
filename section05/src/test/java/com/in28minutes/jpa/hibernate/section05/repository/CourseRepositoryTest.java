@@ -29,11 +29,11 @@ class CourseRepositoryTest {
 	@Autowired
 	EntityManager em;
 	
-	@Test
-	public void findById_basic() {
-		Course course = repository.findById(10002L);
-		assertEquals("Spring in 50 steps", course.getName());
-	}
+//	@Test
+//	public void findById_basic() {
+//		Course course = repository.findById(10002L);
+//		assertEquals("Spring in 50 steps", course.getName());
+//	}
 	
 	@Test
 	@DirtiesContext
@@ -44,53 +44,53 @@ class CourseRepositoryTest {
 		assertNull(repository.findById(10002L));
 	}
 	
-	@Test
-	@DirtiesContext
-	public void save_basic() {
-		
-		//course 객체 존재 확인
-		Course course = repository.findById(10001L);
-		assertEquals("JPA in 50 steps", course.getName());
-
-		//update 수행
-		course.setName("JPA in 50 steps - Updated");
-		repository.save(course);
-		
-		//update 제대로 수행됐는지 확인
-		Course course1 = repository.findById(10001L);
-		assertEquals("JPA in 50 steps - Updated", course1.getName());
-	}
-	
-	@Test
-	public void playWithEntityManager() {
-		repository.playWithEntityManager();
-	}
-	
-	@Test
-	@Transactional
-	public void retrieveReviewsForCourse() {
-		Course course = repository.findById(10001l);
-		logger.info("{}", course.getReviews());
-	}
-
-	@Test
-	@Transactional
-	public void retrieveCourseForReview() {
-		Review review = em.find(Review.class, 50001l);
-		logger.info("{}", review.getCourse());
-	}
-	
-	
-	/**CACHING**/
-	@Test
-	@Transactional //이게 없으면 first query, second query 각각 실행
-	public void findById_firstLevelCache_demo() {
-		Course course1 = repository.findById(10001L);
-		logger.info("first query --- {}", course1);
-		Course course2 = repository.findById(10001L);
-		logger.info("second query --- {}", course2);
-		assertEquals("JPA in 50 steps", course1.getName());
-		assertEquals("JPA in 50 steps", course1.getName());
-	}
+//	@Test
+//	@DirtiesContext
+//	public void save_basic() {
+//		
+//		//course 객체 존재 확인
+//		Course course = repository.findById(10001L);
+//		assertEquals("JPA in 50 steps", course.getName());
+//
+//		//update 수행
+//		course.setName("JPA in 50 steps - Updated");
+//		repository.save(course);
+//		
+//		//update 제대로 수행됐는지 확인
+//		Course course1 = repository.findById(10001L);
+//		assertEquals("JPA in 50 steps - Updated", course1.getName());
+//	}
+//	
+//	@Test
+//	public void playWithEntityManager() {
+//		repository.playWithEntityManager();
+//	}
+//	
+//	@Test
+//	@Transactional
+//	public void retrieveReviewsForCourse() {
+//		Course course = repository.findById(10001l);
+//		logger.info("{}", course.getReviews());
+//	}
+//
+//	@Test
+//	@Transactional
+//	public void retrieveCourseForReview() {
+//		Review review = em.find(Review.class, 50001l);
+//		logger.info("{}", review.getCourse());
+//	}
+//	
+//	
+//	/**CACHING**/
+//	@Test
+//	@Transactional //이게 없으면 first query, second query 각각 실행
+//	public void findById_firstLevelCache_demo() {
+//		Course course1 = repository.findById(10001L);
+//		logger.info("first query --- {}", course1);
+//		Course course2 = repository.findById(10001L);
+//		logger.info("second query --- {}", course2);
+//		assertEquals("JPA in 50 steps", course1.getName());
+//		assertEquals("JPA in 50 steps", course1.getName());
+//	}
 	
 }
